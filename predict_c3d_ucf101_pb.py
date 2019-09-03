@@ -66,7 +66,7 @@ def model_test(model_file,
           all_count = all_count + 1
         
         duration = time.time() - start_time
-        print('Step %d: %.3f sec' % (step, duration), end=', ')
+        print('Step %d: %.3f sec' % (step, duration))
       
       acc = float(true_count) / all_count
       print("accuracy: " + "{:.5f}".format(acc))

@@ -7,7 +7,6 @@ import time
 flags = tf.app.flags
 
 flags.DEFINE_integer('batch_size', 10, 'Batch size.')
-flags.DEFINE_integer('max_steps', 10, 'Max steps.')
 FLAGS = flags.FLAGS
 
 def model_test(model_file,
@@ -43,10 +42,8 @@ def model_test(model_file,
       logits = tf.concat(logits, 0)
       norm_score = tf.nn.softmax(logits)
 
-      if FLAGS.max_steps is None:
-        max_steps = int((num_test_videos - 1) / (FLAGS.batch_size) + 1)
-      else:
-        max_steps = FLAGS.max_steps
+      max_steps = int((num_test_videos - 1) / (FLAGS.batch_size) + 1)
+      #max_steps = 10
       print("Info: Max steps is %d" % max_steps)
       
       true_count = 0

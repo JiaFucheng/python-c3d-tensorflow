@@ -22,7 +22,7 @@ def model_test(model_file,
     graph_def.ParseFromString(model_f.read())
     _ = tf.import_graph_def(graph_def, name='')
     
-    # Limit GPU memory
+    # Limit GPU memory as 25%
     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.250)
 
     with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as sess:
@@ -36,14 +36,12 @@ def model_test(model_file,
       
       # Session run
       logits = []
-      #logit = sess.run(tensor_output, feed_dict={tensor_input: test_images})
       logit = tensor_output
       logits.append(logit)
       logits = tf.concat(logits, 0)
       norm_score = tf.nn.softmax(logits)
 
       max_steps = int((num_test_videos - 1) / (FLAGS.batch_size) + 1)
-      #max_steps = 10
       print("Info: Max steps is %d" % max_steps)
       
       true_count = 0
@@ -77,11 +75,12 @@ def model_test(model_file,
       print("Info: Accuracy: " + "{:.5f}".format(acc))
 
 if __name__ == "__main__":
-  # Set pb model path
+  # Set parameters
   model_file         = "saved_model/c3d_10000.pb"
   input_tensor_name  = "input:0"
   output_tensor_name = "out:0"
   test_list_file     = "list/test.list"
+  # Run
   model_test(model_file,
              input_tensor_name,
              output_tensor_name,

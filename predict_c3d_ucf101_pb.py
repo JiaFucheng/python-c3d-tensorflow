@@ -40,7 +40,7 @@ def model_test(model_file,
       norm_score = tf.nn.softmax(logits)
 
       max_steps = int((num_test_videos - 1) / (FLAGS.batch_size) + 1)
-      print("Info: max steps is %d" % max_steps)
+      print("Info: Max steps is %d" % max_steps)
       true_count = 0
       all_count = 0
       next_start_pos = 0
@@ -66,10 +66,10 @@ def model_test(model_file,
           all_count = all_count + 1
         
         duration = time.time() - start_time
-        print('Step %d: %.3f sec' % (step, duration))
+        print('Info: step %d: %.3f sec' % (step, duration))
       
       acc = float(true_count) / all_count
-      print("accuracy: " + "{:.5f}".format(acc))
+      print("Info: Accuracy: " + "{:.5f}".format(acc))
 
 if __name__ == "__main__":
   # Set pb model path

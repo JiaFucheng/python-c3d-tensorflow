@@ -15,7 +15,7 @@ def model_test(model_file,
                output_tensor_name,
                test_list_file):
   num_test_videos = len(list(open(test_list_file,'r')))
-  print("Info: Number of test videos={}".format(num_test_videos))
+  print("Info: Number of test videos is {}".format(num_test_videos))
   
   with tf.Graph().as_default():
     graph_def = tf.GraphDef()
